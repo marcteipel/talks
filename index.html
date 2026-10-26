@@ -34,7 +34,7 @@
         --cp-surface: #ffffff;
         --cp-surface-soft: #f5f5f5;
         --cp-border: #dedede;
-        --cp-border-strong: #919191;
+        --cp-border-strong: #b6aea4;
         --cp-text: #242424;
         --cp-text-muted: #5c5c5c;
         --cp-text-soft: #6f6f6f;
@@ -44,9 +44,9 @@
         --cp-accent-fg: #ffffff;
         --cp-success: #16a34a;
         --cp-danger: #dc2626;
-        --cp-warning: #f59e0b;
+        --cp-warning: #8a5b00;
         --cp-link: #0078d4;
-        --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.12);
+        --cp-shadow: 0 18px 42px rgba(36, 28, 30, 0.12);
         --cp-overlay: rgba(255, 255, 255, 0.8);
         --cp-panel: rgba(255, 255, 255, 0.86);
         --cp-panel-strong: rgba(255, 255, 255, 0.96);
@@ -60,7 +60,7 @@
         --cp-surface: #292929;
         --cp-surface-soft: #2e2e2e;
         --cp-border: #474747;
-        --cp-border-strong: #5f5f5f;
+        --cp-border-strong: #6f6864;
         --cp-text: #dedede;
         --cp-text-muted: #919191;
         --cp-text-soft: #b0b0b0;
@@ -91,7 +91,7 @@
       body {
         margin: 0;
         min-height: 100vh;
-        background: var(--cp-surface);
+        background: var(--cp-bg);
         color: var(--cp-text);
         font-family: "Segoe UI", Aptos, Calibri, -apple-system, BlinkMacSystemFont, sans-serif;
         line-height: 1.5;
@@ -108,8 +108,9 @@
       }
 
       .hero {
-        padding: 72px 0 64px;
-        border-bottom: 2px solid var(--cp-text);
+        padding: 76px 0 68px;
+        border-bottom: 1px solid var(--cp-border);
+        background: var(--cp-bg-elevated);
       }
 
       .hero-grid {
@@ -119,19 +120,14 @@
         align-items: stretch;
       }
 
-      .kicker {
-        margin: 0 0 12px;
-        color: var(--cp-accent);
-        font-size: 0.78rem;
-        font-weight: 700;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
+      .hero-grid > div {
+        min-width: 0;
       }
 
       h1 {
         max-width: 780px;
         margin: 0;
-        font-size: clamp(3.25rem, 7vw, 6.5rem);
+        font-size: clamp(3.5rem, 8vw, 7rem);
         line-height: 0.86;
         letter-spacing: -0.065em;
         font-weight: 800;
@@ -145,7 +141,7 @@
       }
 
       .bio {
-        max-width: 760px;
+        max-width: 66ch;
         margin: 24px 0 0;
         color: var(--cp-text-muted);
         font-size: 1rem;
@@ -179,15 +175,26 @@
         background: var(--cp-surface-soft);
       }
 
+      .actions .button:first-child {
+        border-color: var(--cp-accent);
+        background: var(--cp-accent);
+        color: var(--cp-accent-fg);
+      }
+
+      .actions .button:first-child:hover {
+        border-color: var(--cp-accent-hover);
+        background: var(--cp-accent-hover);
+      }
+
       .profile-card {
-        width: min(100%, 240px);
+        width: min(100%, 280px);
         justify-self: end;
         align-self: center;
-        border: 2px solid var(--cp-text);
-        border-radius: 0.625rem;
+        border: 1px solid var(--cp-border);
+        border-radius: 1rem;
         background: var(--cp-surface);
         overflow: hidden;
-        box-shadow: none;
+        box-shadow: var(--cp-shadow);
       }
 
       .profile-photo {
@@ -197,33 +204,8 @@
         object-fit: cover;
       }
 
-      .profile-facts {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 12px;
-        padding: 20px 24px;
-        border-top: 2px solid var(--cp-text);
-      }
-
-      .fact strong,
-      .fact span {
-        display: block;
-      }
-
-      .fact strong {
-        font-size: 1.25rem;
-        line-height: 1.2;
-      }
-
-      .fact span {
-        color: var(--cp-text-muted);
-        font-size: 0.76rem;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-      }
-
       main {
-        padding: 64px 0 88px;
+        padding: 68px 0 100px;
       }
 
       .section-heading {
@@ -231,7 +213,7 @@
         align-items: end;
         justify-content: space-between;
         gap: 24px;
-        margin-bottom: 32px;
+        margin-bottom: 36px;
       }
 
       .section-heading h2 {
@@ -243,7 +225,7 @@
       }
 
       .section-heading p {
-        max-width: 520px;
+        max-width: 620px;
         margin: 8px 0 0;
         color: var(--cp-text-muted);
       }
@@ -290,18 +272,17 @@
       .events {
         position: relative;
         display: grid;
-        gap: 20px;
+        gap: 18px;
       }
 
       .event {
         display: grid;
-        grid-template-columns: 190px minmax(0, 1fr);
-        min-height: 210px;
-        border: 1px solid var(--cp-border-strong);
-        border-radius: 0.625rem;
+        grid-template-columns: 168px minmax(0, 1fr);
+        border: 1px solid var(--cp-border);
+        border-radius: 0.9rem;
         overflow: hidden;
         background: var(--cp-surface);
-        box-shadow: none;
+        box-shadow: 0 5px 18px rgba(36, 28, 30, 0.045);
       }
 
       .event-brand {
@@ -309,8 +290,8 @@
         align-items: center;
         justify-content: center;
         min-height: 100%;
-        padding: 30px;
-        border-right: 1px solid var(--cp-border-strong);
+        padding: 28px;
+        border-right: 1px solid var(--cp-border);
         background: var(--cp-bg-elevated);
       }
 
@@ -323,7 +304,7 @@
       }
 
       .event-body {
-        padding: 28px 32px 24px;
+        padding: 30px 34px 28px;
       }
 
       .event-top {
@@ -445,8 +426,8 @@
       }
 
       footer {
-        border-top: 2px solid var(--cp-text);
-        background: var(--cp-surface);
+        border-top: 1px solid var(--cp-border);
+        background: var(--cp-bg-elevated);
       }
 
       .footer-inner {
@@ -471,7 +452,7 @@
         }
 
         .profile-card {
-          width: min(100%, 240px);
+          width: min(100%, 280px);
           justify-self: start;
         }
 
@@ -495,15 +476,15 @@
         }
 
         .hero {
-          padding: 52px 0 44px;
+          padding: 52px 0 48px;
         }
 
         h1 {
-          font-size: clamp(3rem, 16vw, 4.6rem);
+          font-size: clamp(3rem, 14vw, 4.6rem);
         }
 
         main {
-          padding: 48px 0 56px;
+          padding: 48px 0 64px;
         }
 
         .event {
@@ -522,7 +503,7 @@
         }
 
         .event-body {
-          padding: 22px 20px;
+          padding: 24px 22px;
         }
 
         .event-top {
@@ -570,16 +551,6 @@
 
         <aside class="profile-card" aria-label="Speaker profile">
           <img class="profile-photo" src="assets/marc-teipel.png" alt="Portrait of Marc Teipel" />
-          <div class="profile-facts">
-            <div class="fact">
-              <strong>7</strong>
-              <span>Featured events</span>
-            </div>
-            <div class="fact">
-              <strong>3</strong>
-              <span>Formats</span>
-            </div>
-          </div>
         </aside>
       </div>
     </section>
@@ -587,7 +558,6 @@
     <main class="page" id="speaking">
       <div class="section-heading">
         <div>
-          <p class="kicker">Selected experience</p>
           <h2>Speaking & workshops</h2>
           <p>Sessions on applied AI, agentic systems, and turning emerging technology into impact.</p>
         </div>
@@ -595,6 +565,7 @@
           <span class="type type-workshop">Workshop</span>
           <span class="type type-talk">Talk</span>
           <span class="type type-panel">Panel</span>
+          <span class="type type-organizer">Organizer</span>
         </div>
       </div>
 
