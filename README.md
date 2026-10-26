@@ -8,6 +8,7 @@ The site is a dependency-free static GitHub Page:
 
 - `index.html` contains the complete portfolio
 - `assets/logos/` contains locally hosted event logos
+- `assets/fonts/` contains the locally hosted Newsreader font and its SIL Open Font License
 - `assets/slides/` contains downloadable presentation material
 - `assets/marc-teipel.png` is the profile photo
 
@@ -28,4 +29,5 @@ the repository root (`/`).
 ## License
 
 The source code is available under the [MIT License](LICENSE). Event and company logos remain the
-property of their respective trademark owners.
+property of their respective trademark owners. Newsreader is distributed under the
+[SIL Open Font License](assets/fonts/OFL-Newsreader.txt).

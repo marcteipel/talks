@@ -27,17 +27,25 @@
       })();
     </script>
     <style>
+      @font-face {
+        font-family: "Newsreader";
+        src: url("assets/fonts/newsreader-latin-variable.woff2") format("woff2");
+        font-style: normal;
+        font-weight: 300 600;
+        font-display: swap;
+      }
+
       :root {
         color-scheme: light;
         --cp-bg: #f7f4ef;
         --cp-bg-elevated: #fcfbf8;
         --cp-surface: #ffffff;
-        --cp-surface-soft: #f5f5f5;
-        --cp-border: #dedede;
-        --cp-border-strong: #b6aea4;
-        --cp-text: #242424;
-        --cp-text-muted: #5c5c5c;
-        --cp-text-soft: #6f6f6f;
+        --cp-surface-soft: #f1eae4;
+        --cp-border: #d9cec5;
+        --cp-border-strong: #a99a8e;
+        --cp-text: #292421;
+        --cp-text-muted: #625954;
+        --cp-text-soft: #655952;
         --cp-accent: #b11f4b;
         --cp-accent-hover: #9a1a41;
         --cp-accent-soft: rgba(177, 31, 75, 0.08);
@@ -45,7 +53,7 @@
         --cp-success: #16a34a;
         --cp-danger: #dc2626;
         --cp-warning: #8a5b00;
-        --cp-link: #0078d4;
+        --cp-link: #006c78;
         --cp-shadow: 0 18px 42px rgba(36, 28, 30, 0.12);
         --cp-overlay: rgba(255, 255, 255, 0.8);
         --cp-panel: rgba(255, 255, 255, 0.86);
@@ -55,15 +63,15 @@
       }
       html[data-theme="dark"] {
         color-scheme: dark;
-        --cp-bg: #3d3b3a;
-        --cp-bg-elevated: #343231;
-        --cp-surface: #292929;
-        --cp-surface-soft: #2e2e2e;
-        --cp-border: #474747;
-        --cp-border-strong: #6f6864;
-        --cp-text: #dedede;
-        --cp-text-muted: #919191;
-        --cp-text-soft: #b0b0b0;
+        --cp-bg: #292421;
+        --cp-bg-elevated: #302a27;
+        --cp-surface: #342e2b;
+        --cp-surface-soft: #403733;
+        --cp-border: #514740;
+        --cp-border-strong: #786b61;
+        --cp-text: #f2ebe5;
+        --cp-text-muted: #c5b9b2;
+        --cp-text-soft: #b7a8a0;
         --cp-accent: #fd8ea1;
         --cp-accent-hover: #fb7b91;
         --cp-accent-soft: rgba(253, 142, 161, 0.14);
@@ -71,7 +79,7 @@
         --cp-success: #4ade80;
         --cp-danger: #f87171;
         --cp-warning: #fbbf24;
-        --cp-link: #4da6ff;
+        --cp-link: #8dc6d0;
         --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.32);
         --cp-overlay: rgba(41, 41, 41, 0.88);
         --cp-panel: rgba(41, 41, 41, 0.72);
@@ -86,6 +94,7 @@
 
       html {
         scroll-behavior: smooth;
+        scrollbar-color: var(--cp-accent) var(--cp-bg);
       }
 
       body {
@@ -94,8 +103,27 @@
         background: var(--cp-bg);
         color: var(--cp-text);
         font-family: "Segoe UI", Aptos, Calibri, -apple-system, BlinkMacSystemFont, sans-serif;
-        line-height: 1.5;
+        line-height: 1.6;
         border-top: 6px solid var(--cp-accent);
+      }
+
+      ::selection {
+        background: var(--cp-accent);
+        color: var(--cp-accent-fg);
+      }
+
+      ::-webkit-scrollbar {
+        width: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: var(--cp-bg);
+      }
+
+      ::-webkit-scrollbar-thumb {
+        border: 2px solid var(--cp-bg);
+        border-radius: 8px;
+        background: var(--cp-border-strong);
       }
 
       a {
@@ -103,21 +131,21 @@
       }
 
       .page {
-        width: min(1180px, calc(100% - 48px));
+        width: min(1160px, calc(100% - 56px));
         margin: 0 auto;
       }
 
       .hero {
-        padding: 76px 0 68px;
+        padding: 82px 0 88px;
         border-bottom: 1px solid var(--cp-border);
         background: var(--cp-bg-elevated);
       }
 
       .hero-grid {
         display: grid;
-        grid-template-columns: minmax(0, 1.6fr) minmax(220px, 0.5fr);
-        gap: 72px;
-        align-items: stretch;
+        grid-template-columns: minmax(0, 1fr) minmax(260px, 320px);
+        gap: clamp(48px, 8vw, 112px);
+        align-items: center;
       }
 
       .hero-grid > div {
@@ -125,79 +153,80 @@
       }
 
       h1 {
-        max-width: 780px;
+        max-width: none;
         margin: 0;
-        font-size: clamp(3.5rem, 8vw, 7rem);
-        line-height: 0.86;
-        letter-spacing: -0.065em;
-        font-weight: 800;
+        font-family: "Newsreader", Georgia, serif;
+        font-size: clamp(4rem, 8vw, 6rem);
+        line-height: 0.92;
+        letter-spacing: -0.035em;
+        font-weight: 450;
       }
 
       .role {
-        margin: 24px 0 0;
+        margin: 20px 0 0;
         color: var(--cp-text);
-        font-size: clamp(1.15rem, 2vw, 1.45rem);
-        font-weight: 750;
+        font-size: clamp(1.1rem, 1.8vw, 1.3rem);
+        font-weight: 650;
       }
 
       .bio {
-        max-width: 66ch;
-        margin: 24px 0 0;
+        max-width: 58ch;
+        margin: 22px 0 0;
         color: var(--cp-text-muted);
-        font-size: 1rem;
-        line-height: 1.7;
+        font-size: 1.04rem;
+        line-height: 1.75;
       }
 
       .actions {
         display: flex;
         flex-wrap: wrap;
-        gap: 10px;
-        margin-top: 28px;
+        gap: 24px;
+        margin-top: 30px;
       }
 
       .button {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        min-height: 42px;
-        padding: 0 16px;
-        border: 1px solid var(--cp-border);
-        border-radius: 0.625rem;
-        background: var(--cp-surface);
+        min-height: 44px;
+        padding: 0;
+        border: 0;
+        border-bottom: 1px solid transparent;
+        border-radius: 0;
+        background: transparent;
         color: var(--cp-text);
         font-size: 0.9rem;
-        font-weight: 650;
+        font-weight: 700;
         text-decoration: none;
       }
 
       .button:hover {
-        border-color: var(--cp-text);
-        background: var(--cp-surface-soft);
+        border-bottom-color: currentColor;
       }
 
       .actions .button:first-child {
-        border-color: var(--cp-accent);
-        background: var(--cp-accent);
-        color: var(--cp-accent-fg);
-      }
-
-      .actions .button:first-child:hover {
-        border-color: var(--cp-accent-hover);
-        background: var(--cp-accent-hover);
+        border-bottom-color: var(--cp-accent);
+        color: var(--cp-accent);
       }
 
       .profile-card {
-        width: min(100%, 280px);
+        position: relative;
+        width: min(100%, 320px);
         justify-self: end;
         align-self: center;
-        border: 1px solid var(--cp-border);
-        border-radius: 1rem;
-        background: var(--cp-surface);
-        overflow: hidden;
-        box-shadow: var(--cp-shadow);
+        padding: 0 14px 14px 0;
+      }
+
+      .profile-card::before {
+        position: absolute;
+        inset: 14px 0 0 14px;
+        border: 1px solid var(--cp-accent);
+        content: "";
       }
 
       .profile-photo {
+        position: relative;
+        z-index: 1;
         display: block;
         width: 100%;
         aspect-ratio: 1;
@@ -205,7 +234,7 @@
       }
 
       main {
-        padding: 68px 0 100px;
+        padding: 72px 0 104px;
       }
 
       .section-heading {
@@ -213,19 +242,20 @@
         align-items: end;
         justify-content: space-between;
         gap: 24px;
-        margin-bottom: 36px;
+        margin-bottom: 38px;
       }
 
       .section-heading h2 {
         margin: 0;
-        font-size: clamp(2.2rem, 4vw, 3.7rem);
+        font-family: "Newsreader", Georgia, serif;
+        font-size: clamp(2.8rem, 5vw, 4rem);
         line-height: 1;
-        letter-spacing: -0.045em;
-        font-weight: 800;
+        letter-spacing: -0.03em;
+        font-weight: 450;
       }
 
       .section-heading p {
-        max-width: 620px;
+        max-width: 58ch;
         margin: 8px 0 0;
         color: var(--cp-text-muted);
       }
@@ -234,190 +264,179 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: flex-end;
-        gap: 8px;
+        gap: 0;
       }
 
       .type {
-        display: inline-flex;
-        align-items: center;
-        min-height: 25px;
-        padding: 0 9px;
-        border-radius: 999px;
-        font-size: 0.7rem;
-        font-weight: 750;
-        letter-spacing: 0.07em;
+        display: inline;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
         text-transform: uppercase;
       }
 
+      .legend .type + .type::before {
+        padding: 0 10px;
+        color: var(--cp-border-strong);
+        content: "/";
+      }
+
       .type-workshop {
-        background: var(--cp-accent-soft);
         color: var(--cp-accent);
       }
 
       .type-talk {
-        background: var(--cp-surface-soft);
         color: var(--cp-link);
       }
 
       .type-panel {
-        background: var(--cp-surface-soft);
         color: var(--cp-warning);
       }
 
       .type-organizer {
-        background: var(--cp-highlight);
         color: var(--cp-accent);
       }
 
       .events {
-        position: relative;
         display: grid;
-        gap: 18px;
+        border-top: 1px solid var(--cp-border);
       }
 
       .event {
         display: grid;
-        grid-template-columns: 168px minmax(0, 1fr);
-        border: 1px solid var(--cp-border);
-        border-radius: 0.9rem;
-        overflow: hidden;
-        background: var(--cp-surface);
-        box-shadow: 0 5px 18px rgba(36, 28, 30, 0.045);
+        grid-template-columns: 126px minmax(0, 1fr);
+        gap: 28px;
+        border-bottom: 1px solid var(--cp-border);
       }
 
       .event-brand {
         display: flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 100%;
-        padding: 28px;
-        border-right: 1px solid var(--cp-border);
-        background: var(--cp-bg-elevated);
+        align-items: flex-start;
+        justify-content: flex-start;
+        padding: 38px 10px 32px 0;
       }
 
       .event-brand img {
         display: block;
         width: 100%;
-        max-width: 136px;
-        max-height: 62px;
+        max-width: 116px;
+        max-height: 48px;
         object-fit: contain;
+        object-position: left top;
       }
 
       .event-body {
-        padding: 30px 34px 28px;
+        min-width: 0;
+        padding: 32px 0 34px;
       }
 
       .event-top {
         display: flex;
         align-items: flex-start;
         justify-content: space-between;
-        gap: 20px;
+        gap: 24px;
       }
 
       .event-labels {
         display: flex;
-        align-items: center;
-        gap: 7px;
+        flex-wrap: wrap;
+        align-items: baseline;
+        gap: 8px;
         flex: 0 0 auto;
+        padding-top: 8px;
       }
 
       .language {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 25px;
-        min-width: 32px;
-        padding: 0 7px;
-        border: 1px solid var(--cp-border);
-        border-radius: 999px;
-        background: var(--cp-bg-elevated);
+        display: inline;
         color: var(--cp-text-muted);
-        font-size: 0.68rem;
-        font-weight: 800;
-        letter-spacing: 0.06em;
-      }
-
-      .event-date {
-        margin: 0 0 6px;
-        color: var(--cp-accent);
-        font-size: 0.78rem;
-        font-weight: 650;
-        letter-spacing: 0.06em;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
         text-transform: uppercase;
       }
 
+      .event-date {
+        margin: 7px 0 0;
+        color: var(--cp-text-muted);
+        font-size: 0.88rem;
+        font-weight: 550;
+      }
+
       .event h3 {
-        max-width: 720px;
         margin: 0;
-        font-size: clamp(1.35rem, 2.2vw, 1.8rem);
-        line-height: 1.18;
+        font-family: "Newsreader", Georgia, serif;
+        font-size: clamp(1.8rem, 3.2vw, 2.5rem);
+        font-weight: 450;
+        line-height: 1.08;
         letter-spacing: -0.025em;
       }
 
       .event-summary {
-        max-width: 780px;
-        margin: 10px 0 0;
+        max-width: 68ch;
+        margin: 14px 0 0;
         color: var(--cp-text-muted);
-        font-size: 0.94rem;
+        font-size: 0.98rem;
+        line-height: 1.65;
+      }
+
+      .event-summary + .event-summary {
+        margin-top: 8px;
       }
 
       .event-info {
         display: flex;
         flex-wrap: wrap;
-        gap: 16px;
-        margin-top: 10px;
+        gap: 0;
+        margin-top: 12px;
         color: var(--cp-text-soft);
-        font-size: 0.8rem;
-        font-weight: 600;
+        font-size: 0.82rem;
+        font-variant-numeric: lining-nums tabular-nums;
+      }
+
+      .event-info > * + *::before {
+        padding: 0 10px;
+        color: var(--cp-border-strong);
+        content: "·";
       }
 
       .details {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        gap: 7px;
-        margin-top: 12px;
+        margin-top: 14px;
+        color: var(--cp-text-soft);
+        font-size: 0.86rem;
+        line-height: 1.6;
       }
 
       .detail {
-        display: inline-flex;
-        align-items: center;
-        min-height: 27px;
+        display: inline;
+      }
+
+      .detail + .detail::before {
         padding: 0 9px;
-        border: 1px solid var(--cp-border);
-        border-radius: 999px;
-        background: var(--cp-surface);
-        color: var(--cp-text-muted);
-        font-size: 0.76rem;
+        color: var(--cp-accent);
+        content: "·";
       }
 
       .event-links {
         display: flex;
         flex-wrap: wrap;
-        gap: 8px;
-        margin-top: 14px;
-        padding-top: 13px;
-        border-top: 1px solid var(--cp-border);
+        gap: 8px 22px;
+        margin-top: 16px;
       }
 
       .event-links a {
         display: inline-flex;
         align-items: center;
-        min-height: 34px;
-        padding: 0 12px;
-        border: 1px solid var(--cp-border-strong);
-        border-radius: 0.625rem;
-        background: var(--cp-surface-soft);
-        color: var(--cp-text);
-        font-size: 0.84rem;
-        font-weight: 700;
-        text-decoration: none;
+        min-height: 44px;
+        color: var(--cp-accent);
+        font-size: 0.88rem;
+        font-weight: 650;
+        text-decoration: underline;
+        text-decoration-thickness: 1px;
+        text-underline-offset: 0.22em;
       }
 
       .event-links a:hover {
-        border-color: var(--cp-accent);
-        background: var(--cp-accent-soft);
-        color: var(--cp-accent);
+        color: var(--cp-accent-hover);
       }
 
       :focus-visible {
@@ -442,20 +461,11 @@
 
       .footer-inner a {
         color: var(--cp-link);
-        text-decoration: none;
+        text-decoration: underline;
+        text-underline-offset: 0.2em;
       }
 
       @media (max-width: 860px) {
-        .hero-grid {
-          grid-template-columns: 1fr;
-          gap: 40px;
-        }
-
-        .profile-card {
-          width: min(100%, 280px);
-          justify-self: start;
-        }
-
         .section-heading {
           display: block;
         }
@@ -466,56 +476,83 @@
         }
 
         .event {
-          grid-template-columns: 132px minmax(0, 1fr);
+          grid-template-columns: 104px minmax(0, 1fr);
+          gap: 22px;
+        }
+
+        .event-brand {
+          padding-right: 0;
+        }
+
+        .event-body {
+          padding-top: 30px;
+        }
+      }
+
+      @media (max-width: 760px) {
+        .hero-grid {
+          grid-template-columns: minmax(0, 1fr);
+          gap: 36px;
+        }
+
+        .profile-card {
+          width: min(100%, 270px);
+          justify-self: start;
         }
       }
 
       @media (max-width: 620px) {
         .page {
-          width: min(100% - 28px, 1180px);
+          width: min(100% - 32px, 1160px);
         }
 
         .hero {
-          padding: 52px 0 48px;
+          padding: 52px 0 60px;
         }
 
         h1 {
-          font-size: clamp(3rem, 14vw, 4.6rem);
+          font-size: clamp(3rem, 13vw, 5rem);
         }
 
         main {
-          padding: 48px 0 64px;
+          padding: 56px 0 72px;
+        }
+
+        .section-heading h2 {
+          font-size: clamp(2.5rem, 11vw, 3.6rem);
+        }
+
+        .legend {
+          margin-top: 14px;
         }
 
         .event {
-          grid-template-columns: 1fr;
+          grid-template-columns: minmax(0, 1fr);
+          gap: 0;
         }
 
         .event-brand {
-          min-height: 96px;
-          border-right: 0;
-          border-bottom: 1px solid var(--cp-border);
+          min-height: 0;
+          padding: 24px 0 0;
           justify-content: flex-start;
         }
 
         .event-brand img {
-          max-width: 118px;
+          max-width: 104px;
+          max-height: 40px;
         }
 
         .event-body {
-          padding: 24px 22px;
+          padding: 16px 0 28px;
         }
 
         .event-top {
           display: block;
         }
 
-        .event-top .type {
-          margin-top: 12px;
-        }
-
         .event-labels {
-          margin-top: 12px;
+          margin-top: 14px;
+          padding-top: 0;
         }
 
         .footer-inner {
@@ -526,6 +563,12 @@
         .footer-inner span {
           display: block;
           margin-top: 6px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
         }
       }
     </style>
@@ -577,8 +620,12 @@
           <div class="event-body">
             <div class="event-top">
               <div>
-                <p class="event-date">Microsoft Frontier Tour Cologne</p>
                 <h3 id="frontiertour2026-title">Building &amp; deploying AI agents with Microsoft Foundry</h3>
+                <p class="event-date">Microsoft Frontier Tour Cologne</p>
+                <div class="event-info">
+                  <time datetime="2026-10-22">22 October 2026</time>
+                  <span>Confex Köln</span>
+                </div>
               </div>
               <div class="event-labels">
                 <span class="type type-workshop">Workshop</span>
@@ -593,10 +640,6 @@
             <p class="event-summary">
               <strong>Lab requirement: Participants needed to bring their own laptop with a keyboard.</strong>
             </p>
-            <div class="event-info">
-              <span>22 October 2026</span>
-              <span>Confex Köln</span>
-            </div>
             <div class="details">
               <span class="detail">Microsoft Foundry</span>
               <span class="detail">AI Agents</span>
@@ -617,8 +660,12 @@
           <div class="event-body">
             <div class="event-top">
               <div>
-                <p class="event-date">Microsoft · Pre-AI Tour Cologne</p>
                 <h3 id="ai-platform2026-title">Building &amp; Running an AI Platform</h3>
+                <p class="event-date">Microsoft · Pre-AI Tour Cologne</p>
+                <div class="event-info">
+                  <time datetime="2026-10-21">21 October 2026</time>
+                  <span>Microsoft Cologne</span>
+                </div>
               </div>
               <div class="event-labels">
                 <span class="language" aria-label="English">EN</span>
@@ -632,10 +679,6 @@
               enterprise context for agents, platform foundations, agent governance, and practical
               AI adoption.
             </p>
-            <div class="event-info">
-              <span>21 October 2026</span>
-              <span>Microsoft Cologne</span>
-            </div>
             <div class="details">
               <span class="detail">Enterprise AI Platforms</span>
               <span class="detail">AI Agents</span>
@@ -651,8 +694,12 @@
           <div class="event-body">
             <div class="event-top">
               <div>
-                <p class="event-date">WeAreDevelopers World Congress</p>
                 <h3 id="wad2026-title">Context &amp; Models: How to make your agents truly intelligent</h3>
+                <p class="event-date">WeAreDevelopers World Congress</p>
+                <div class="event-info">
+                  <time datetime="2026-07-10">10 July 2026</time>
+                  <span>CityCube Berlin</span>
+                </div>
               </div>
               <div class="event-labels">
                 <span class="language" aria-label="English">EN</span>
@@ -664,10 +711,6 @@
               model selection—improving grounding, reducing noise, and making real-world agent behavior
               more reliable.
             </p>
-            <div class="event-info">
-              <span>10 July 2026</span>
-              <span>CityCube Berlin</span>
-            </div>
             <div class="details">
               <span class="detail">AI Agents</span>
               <span class="detail">Context Engineering</span>
@@ -687,8 +730,12 @@
           <div class="event-body">
             <div class="event-top">
               <div>
-                <p class="event-date">Netguru Disruption Forum</p>
                 <h3 id="netguru2025-title">Disruption Forum: AI Agents Online 2025</h3>
+                <p class="event-date">Netguru Disruption Forum</p>
+                <div class="event-info">
+                  <time datetime="2025-04-08">8 April 2025</time>
+                  <span>Online</span>
+                </div>
               </div>
               <div class="event-labels">
                 <span class="language" aria-label="English">EN</span>
@@ -699,10 +746,6 @@
               A panel conversation on practical adoption, governance, and the business impact of
               agentic AI in enterprise environments.
             </p>
-            <div class="event-info">
-              <span>8 April 2025</span>
-              <span>Online</span>
-            </div>
             <div class="details">
               <span class="detail">AI Agents</span>
               <span class="detail">Enterprise AI</span>
@@ -721,8 +764,12 @@
           <div class="event-body">
             <div class="event-top">
               <div>
-                <p class="event-date">Microsoft · Berlin</p>
                 <h3 id="azureadventure-title">Microsoft Azure AI Adventure Day</h3>
+                <p class="event-date">Microsoft · Berlin</p>
+                <div class="event-info">
+                  <time datetime="2024-09-12">12 September 2024</time>
+                  <span>Microsoft Berlin</span>
+                </div>
               </div>
               <div class="event-labels">
                 <span class="language" aria-label="German">DE</span>
@@ -733,10 +780,6 @@
               A hands-on, team-based AI training covering Azure deployment, Retrieval-Augmented
               Generation, function calling, content safety, and optimization for cost and latency.
             </p>
-            <div class="event-info">
-              <span>12 September 2024</span>
-              <span>Microsoft Berlin</span>
-            </div>
             <div class="details">
               <span class="detail">Azure AI</span>
               <span class="detail">RAG</span>
@@ -756,8 +799,12 @@
           <div class="event-body">
             <div class="event-top">
               <div>
-                <p class="event-date">Microsoft AI Tour Berlin</p>
                 <h3 id="aitourberlin-title">Learn how to interact with OpenAI models</h3>
+                <p class="event-date">Microsoft AI Tour Berlin</p>
+                <div class="event-info">
+                  <time datetime="2024-03-19">19 March 2024</time>
+                  <span>CityCube Berlin</span>
+                </div>
               </div>
               <div class="event-labels">
                 <span class="language" aria-label="English">EN</span>
@@ -768,10 +815,6 @@
               A hands-on workshop on effective interaction with OpenAI models, designed to turn model
               capabilities into practical techniques and reliable application patterns.
             </p>
-            <div class="event-info">
-              <span>19 March 2024</span>
-              <span>CityCube Berlin</span>
-            </div>
             <div class="details">
               <span class="detail">OpenAI Models</span>
               <span class="detail">Prompt Engineering</span>
@@ -789,8 +832,12 @@
           <div class="event-body">
             <div class="event-top">
               <div>
-                <p class="event-date">Netguru Disruption Forum</p>
                 <h3 id="netguru2023-title">How to Build AI-Powered Organizations</h3>
+                <p class="event-date">Netguru Disruption Forum</p>
+                <div class="event-info">
+                  <time datetime="2023-06-13">13 June 2023</time>
+                  <span>Online</span>
+                </div>
               </div>
               <div class="event-labels">
                 <span class="language" aria-label="English">EN</span>
@@ -801,10 +848,6 @@
               A session on how organizations can adopt AI-powered ways of working and operationalize
               generative AI for measurable business value and sustainable growth.
             </p>
-            <div class="event-info">
-              <span>13 June 2023</span>
-              <span>Online</span>
-            </div>
             <div class="details">
               <span class="detail">Generative AI</span>
               <span class="detail">AI Transformation</span>
